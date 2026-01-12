@@ -3,9 +3,7 @@ package org.lab1.activity1;
 import org.tree.Tree;
 import java.util.Scanner;
 
-/**
- * Solution for KTH Challenge 2014 Problem A: Numbers On a Tree.
- */
+
 public class NumbersOnATree {
 
     public static void main(String[] args) {
@@ -30,17 +28,18 @@ public class NumbersOnATree {
         for (char direction : path.toCharArray()) {
             long currentIndex = current.getValue();
             if (direction == 'L') {
-                Tree leftChild = new Tree(currentIndex << 1);
+                Tree leftChild = new Tree(currentIndex * 2);
                 current.setLeft(leftChild);
                 current = leftChild;
             } else if (direction == 'R') {
-                Tree rightChild = new Tree((currentIndex << 1) + 1);
+                Tree rightChild = new Tree((currentIndex * 2) + 1);
                 current.setRight(rightChild);
                 current = rightChild;
             }
         }
 
-        long maxNodes = 1L << (height + 1);
+        // 2^(height + 1)
+        long maxNodes = (long) Math.pow(2, height + 1);
         return String.valueOf(maxNodes - current.getValue());
     }
 }
